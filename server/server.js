@@ -3,7 +3,7 @@
 import cors from 'cors'
 import express from 'express'
 
-import routes from './routes/index.js'
+import routes from './src/routes/index.js'
 import winston from 'winston'
 import bodyParser from 'body-parser'
 
