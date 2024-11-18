@@ -38,3 +38,42 @@ export const createUser = async (req,res)=> {
         })
     }
 }
+
+export const login = async (req,res)=> {
+    try {
+
+        const {email, password}= req.body
+
+        if(!email || !password){
+            return res.status(400).json({
+                message: "Email and password are required field"
+            })
+        }
+
+        const user = await User.findOne({email}).select('+password')
+
+        if(!user){
+            return res.status(404).json({
+                message: 'user not found'
+            })
+        }
+
+       if(!user.validPassword(password, user.password)){
+        return res.status(401).json({message: 'Invalid Password'})
+       }
+
+       const response = {
+        uid: user._id,
+        firstName: user.firstName,
+        email: user.email
+       }
+
+       return res.status(200).json(response)
+        
+    } catch (error) {
+        return res.status(500).json({
+            message: "An error occurred while login",
+            details: error.message
+        })
+    }
+}

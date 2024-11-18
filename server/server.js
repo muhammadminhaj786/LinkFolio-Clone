@@ -4,7 +4,6 @@ import cors from 'cors'
 import express from 'express'
 import dotenv from 'dotenv'
 
-import routes from './src/routes/index.js'
 import winston from 'winston'
 import bodyParser from 'body-parser'
 import routes from './src/routes/index.js'
