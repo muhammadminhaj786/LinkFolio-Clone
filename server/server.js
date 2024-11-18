@@ -2,13 +2,18 @@
 
 import cors from 'cors'
 import express from 'express'
+import dotenv from 'dotenv'
 
-import routes from './routes/index.js'
 import winston from 'winston'
 import bodyParser from 'body-parser'
+import routes from './src/routes/index.js'
+import connectDB from './src/config/db.js'
 
 const app = express()
 const PORT = process.env.PORT || 8080
+
+dotenv.config()
+connectDB()
 
 //middle wares
 app.use(
